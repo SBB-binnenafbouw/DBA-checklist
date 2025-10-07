@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="{{ language }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ content.title }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <main class="container">
+      <article>
+        <header>
+          <h1>{{ content.title }}</h1>
+          <p>{{ content.description }}</p>
+          <p class="notice">{{ content.language_notice }}</p>
+        </header>
+
+        <form action="{{ url_for('submit') }}" method="post">
+          <input type="hidden" name="language" value="{{ language }}" />
+          <label>
+            {{ content.language_label }}
+            <select name="lang" onchange="window.location='?lang='+this.value;" aria-label="{{ content.choose_language }}">
+              {% for lang_code in supported_languages %}
+              <option value="{{ lang_code }}" {% if lang_code == language %}selected{% endif %}>{{ lang_code.upper() }}</option>
+              {% endfor %}
+            </select>
+          </label>
+
+          <fieldset>
+            <legend>{{ content.contractor_details }}</legend>
+            <label>
+              {{ content.contractor_name }}
+              <input type="text" name="contractor_name" required />
+            </label>
+            <label>
+              {{ content.contractor_company }}
+              <input type="text" name="contractor_company" />
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>{{ content.client_details }}</legend>
+            <label>
+              {{ content.client_name }}
+              <input type="text" name="client_name" required />
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>{{ content.project_details }}</legend>
+            <label>
+              {{ content.project_name }}
+              <input type="text" name="project_name" required />
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>{{ content.questions_intro }}</legend>
+            {% for question in content.questions %}
+            <label class="question">
+              <span>{{ question.text }}</span>
+              <div class="answers">
+                <label>
+                  <input type="radio" name="{{ question.id }}" value="yes" required />
+                  <span>{{ content.yes }}</span>
+                </label>
+                <label>
+                  <input type="radio" name="{{ question.id }}" value="no" required />
+                  <span>{{ content.no }}</span>
+                </label>
+              </div>
+            </label>
+            {% endfor %}
+          </fieldset>
+
+          <label>
+            {{ content.additional_notes }}
+            <textarea name="notes" rows="4"></textarea>
+          </label>
+
+          <fieldset>
+            <legend>{{ content.declaration }}</legend>
+            <p>{{ content.declaration_text }}</p>
+            <p><strong>{{ content.date_label }}:</strong> {{ current_date }}</p>
+          </fieldset>
+
+          <button type="submit">{{ content.submit }}</button>
+        </form>
+      </article>
+    </main>
+  </body>
+</html>

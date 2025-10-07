@@ -1,0 +1,3 @@
+Flask==3.0.3
+FPDF2==2.7.8
+python-dotenv==1.0.1
