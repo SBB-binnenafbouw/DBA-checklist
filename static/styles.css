@@ -1,0 +1,51 @@
+body {
+  background: #f2f4f7;
+}
+
+main.container {
+  max-width: 720px;
+  margin: 2rem auto;
+}
+
+article {
+  padding: 2rem;
+}
+
+.notice {
+  background-color: #eef3ff;
+  border-left: 4px solid #4f46e5;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+}
+
+fieldset legend {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+label.question {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 1px solid #d0d4dd;
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+  background: #fff;
+}
+
+label.question .answers {
+  display: flex;
+  gap: 1rem;
+}
+
+label.question .answers label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+button[type="submit"] {
+  width: 100%;
+  font-size: 1.1rem;
+}
